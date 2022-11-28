@@ -62,6 +62,11 @@
   dependencies:
     regenerator-runtime "^0.13.11"
 
+"@babel/standalone@^7.20.6":
+  version "7.20.6"
+  resolved "https://registry.yarnpkg.com/@babel/standalone/-/standalone-7.20.6.tgz#7deb7ad244176414c3cbde020aad0607afdbe2fe"
+  integrity sha512-u5at/CbBLETf7kx2LOY4XdhseD79Y099WZKAOMXeT8qvd9OSR515my2UNBBLY4qIht/Qi9KySeQHQwQwxJN4Sw==
+
 "@babel/types@^7.18.6":
   version "7.20.5"
   resolved "https://registry.yarnpkg.com/@babel/types/-/types-7.20.5.tgz#e206ae370b5393d94dfd1d04cd687cace53efa84"
@@ -224,6 +229,11 @@
   version "1.2.1"
   resolved "https://registry.yarnpkg.com/@humanwhocodes/object-schema/-/object-schema-1.2.1.tgz#b520529ec21d8e5945a1851dfd1c32e94e39ff45"
   integrity sha512-ZnQMnLV4e7hDlUvw8H+U8ASL02SS2Gn6+9Ac3wGGLIe7+je2AeAOxPY+izIPJDfFDb7eDjev0Us8MO1iFRN8hA==
+
+"@matthamlin/react-preview-editor@^1.0.1":
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/@matthamlin/react-preview-editor/-/react-preview-editor-1.0.1.tgz#a62ee17dd28f9837223ef5e518b02015605da2f1"
+  integrity sha512-hQpbdWz+US6fNIbFjXduEIEMY8igQjKRV/f3t3eyDRXXqDGXgJ49phJ7FJ3bbYcPg9eStRF1d8T5IIh6LnOIUA==
 
 "@motionone/animation@^10.12.0":
   version "10.14.0"

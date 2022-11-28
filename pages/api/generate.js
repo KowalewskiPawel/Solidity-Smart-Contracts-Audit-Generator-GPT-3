@@ -6,7 +6,7 @@ const configuration = new Configuration({
 
 const openai = new OpenAIApi(configuration);
 
-const basePromptPrefix = "Create a React app code, with all necessary imports. The app will contain:  ";
+const basePromptPrefix = "Create a Functional React app code. Code should be written in a functional style. The app will contain:  ";
 const generateAction = async (req, res) => {
   // Run first prompt
   console.log(`API: ${basePromptPrefix}${req.body.userInput}`)
@@ -14,7 +14,7 @@ const generateAction = async (req, res) => {
   const baseCompletion = await openai.createCompletion({
     model: 'text-davinci-002',
     prompt: `${basePromptPrefix}${req.body.userInput}`,
-    temperature: 0.8,
+    temperature: 0.7,
     max_tokens: 1000,
   });
   

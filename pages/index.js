@@ -1,32 +1,38 @@
 import { useState } from 'react';
 import Head from 'next/head';
 import Image from 'next/image';
+import { Provider, Editor, Preview } from '@matthamlin/react-preview-editor'
+import { transform } from '@babel/standalone'
 import buildspaceLogo from '../assets/buildspace-logo.png';
+
+function transformCode(code) {
+  return transform(code, { presets: [['stage-0', { decoratorsLegacy: true }], 'react'] }).code
+}
 
 const Home = () => {
   const [userInput, setUserInput] = useState('');
   const [apiOutput, setApiOutput] = useState('')
-const [isGenerating, setIsGenerating] = useState(false)
+  const [isGenerating, setIsGenerating] = useState(false)
 
-const callGenerateEndpoint = async () => {
-  setIsGenerating(true);
-  
-  console.log("Calling OpenAI...")
-  const response = await fetch('/api/generate', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({ userInput }),
-  });
+  const callGenerateEndpoint = async () => {
+    setIsGenerating(true);
 
-  const data = await response.json();
-  const { output } = data;
-  console.log("OpenAI replied...", output.text)
+    console.log("Calling OpenAI...")
+    const response = await fetch('/api/generate', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ userInput }),
+    });
 
-  setApiOutput(`${output.text}`);
-  setIsGenerating(false);
-}
+    const data = await response.json();
+    const { output } = data;
+    console.log("OpenAI replied...", output.text)
+
+    setApiOutput(`${output.text}`);
+    setIsGenerating(false);
+  }
 
   const onUserChangedText = (event) => {
     console.log(event.target.value);
@@ -48,35 +54,49 @@ const callGenerateEndpoint = async () => {
         </div>
       </div>
       <div className="prompt-container">
-  <textarea
-    placeholder="start typing here"
-    className="prompt-box"
-    value={userInput}
-    onChange={onUserChangedText}
-  />
-  <div className="prompt-buttons">
-  <a
-    className={isGenerating ? 'generate-button loading' : 'generate-button'}
-    onClick={callGenerateEndpoint}
-  >
-    <div className="generate">
-    {isGenerating ? <span class="loader"></span> : <p>Generate</p>}
-    </div>
-  </a>
-</div>
-  {apiOutput && (
-  <div className="output">
-    <div className="output-header-container">
-      <div className="output-header">
-        <h3>Output</h3>
+        <textarea
+          placeholder="start typing here"
+          className="prompt-box"
+          value={userInput}
+          onChange={onUserChangedText}
+        />
+        <div className="prompt-buttons">
+          <a
+            className={isGenerating ? 'generate-button loading' : 'generate-button'}
+            onClick={callGenerateEndpoint}
+          >
+            <div className="generate">
+              {isGenerating ? <span class="loader"></span> : <p>Generate</p>}
+            </div>
+          </a>
+        </div>
+        {apiOutput && (
+          <div className="output">
+            <div className="output-header-container">
+              <div className="output-header">
+                <h3>Output</h3>
+              </div>
+            </div>
+            <div className="output-content" style={{ backgroundColor: "#BADA55", padding: "10px" }}>
+              <code>{apiOutput}</code>
+            </div>
+            <div style={{ margin: "10em 0" }}>
+              <Provider
+                code={`
+                function App() {
+                  // Copy your generated app logic here
+                  return <h1>Copy the app code here, and be careful to copy only the correct part as the preview may break.</h1>
+                };
+                render(<App />);`}
+                transformCode={transformCode}
+              >
+                <Preview style={{ backgroundColor: "#BADA88" }} />
+                <Editor style={{ border: "solid 4px black", padding: "10px" }} />
+              </Provider>
+            </div>
+          </div>
+        )}
       </div>
-    </div>
-    <div className="output-content" style={{ backgroundColor: "#BADA55", padding: "10px" }}>
-      <code>{apiOutput}</code>
-    </div>
-  </div>
-)}
-</div>
       <div className="badge-container grow">
         <a
           href="https://buildspace.so/builds/ai-writer"

@@ -1,9 +1,7 @@
 import { useState } from 'react';
 import Head from 'next/head';
-import Image from 'next/image';
 import { Provider, Editor, Preview } from '@matthamlin/react-preview-editor'
 import { transform } from '@babel/standalone'
-import buildspaceLogo from '../assets/buildspace-logo.png';
 
 function transformCode(code) {
   return transform(code, { presets: [['stage-0', { decoratorsLegacy: true }], 'react'] }).code
@@ -97,18 +95,6 @@ const Home = () => {
             </div>
           </div>
         )}
-      </div>
-      <div className="badge-container grow">
-        <a
-          href="https://buildspace.so/builds/ai-writer"
-          target="_blank"
-          rel="noreferrer"
-        >
-          <div className="badge">
-            <Image src={buildspaceLogo} alt="buildspace logo" />
-            <p>build with buildspace</p>
-          </div>
-        </a>
       </div>
     </div>
   );

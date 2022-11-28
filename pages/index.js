@@ -54,6 +54,7 @@ const Home = () => {
         </div>
       </div>
       <div className="prompt-container">
+        <p style={{ color: "#FFF" }}>Create a React app that contains: </p>
         <textarea
           placeholder="start typing here"
           className="prompt-box"

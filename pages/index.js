@@ -1,11 +1,5 @@
 import { useState } from 'react';
 import Head from 'next/head';
-import { Provider, Editor, Preview } from '@matthamlin/react-preview-editor'
-import { transform } from '@babel/standalone'
-
-function transformCode(code) {
-  return transform(code, { presets: [['stage-0', { decoratorsLegacy: true }], 'react'] }).code
-}
 
 const Home = () => {
   const [userInput, setUserInput] = useState('');
@@ -39,12 +33,12 @@ const Home = () => {
   return (
     <div className="root">
       <Head>
-        <title>GPT-3 React Code Generator</title>
+        <title>Smart Contracts Audit GPT-3</title>
       </Head>
       <div className="container">
         <div className="header">
           <div className="header-title">
-            <h1>React Code Generator</h1>
+            <h1>Solidity Smart Contracts Audits</h1>
           </div>
           <div className="header-subtitle">
             <h2>powered by GPT-3</h2>
@@ -52,7 +46,7 @@ const Home = () => {
         </div>
       </div>
       <div className="prompt-container">
-        <p style={{ color: "#FFF" }}>Create a React app that contains: </p>
+        <p style={{ color: "#FFF" }}>Pase the smart contract below: </p>
         <textarea
           placeholder="start typing here"
           className="prompt-box"
@@ -65,7 +59,7 @@ const Home = () => {
             onClick={callGenerateEndpoint}
           >
             <div className="generate">
-              {isGenerating ? <span class="loader"></span> : <p>Generate</p>}
+              {isGenerating ? <span class="loader"></span> : <p>Audit</p>}
             </div>
           </a>
         </div>
@@ -76,22 +70,8 @@ const Home = () => {
                 <h3>Output</h3>
               </div>
             </div>
-            <div className="output-content" style={{ backgroundColor: "#BADA55", padding: "10px" }}>
-              <code>{apiOutput}</code>
-            </div>
-            <div style={{ margin: "10em 0" }}>
-              <Provider
-                code={`
-                function App() {
-                  // Copy your generated app logic here
-                  return <h1>Copy the app code here, and be careful to copy only the correct part as the preview may break.</h1>
-                };
-                render(<App />);`}
-                transformCode={transformCode}
-              >
-                <Preview style={{ backgroundColor: "#BADA88" }} />
-                <Editor style={{ border: "solid 4px black", padding: "10px" }} />
-              </Provider>
+            <div className="output-content" style={{ backgroundColor: "#BADA55", padding: "10px", marginBottom: "40px" }}>
+              {apiOutput}
             </div>
           </div>
         )}

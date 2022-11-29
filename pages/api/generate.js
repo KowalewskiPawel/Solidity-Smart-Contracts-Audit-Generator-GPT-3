@@ -6,7 +6,7 @@ const configuration = new Configuration({
 
 const openai = new OpenAIApi(configuration);
 
-const basePromptPrefix = "Create a Functional React app code. Code should be written in a functional style. The app will contain:  ";
+const basePromptPrefix = `Does the following Solidity Smart Contract have any vulnerabilities? If yes, please list them, and explain their consequences. The Solidity Smart contract to review is below: \n `;
 const generateAction = async (req, res) => {
   // Run first prompt
   console.log(`API: ${basePromptPrefix}${req.body.userInput}`)
